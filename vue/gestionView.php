@@ -276,11 +276,12 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-image: url("../vue/style/background.jpg");
+        background-image: url("../vue/style/back7.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         filter: blur(5px);
         /* Appliquer un flou de 5 pixels uniquement Ã  l'image de fond */
+        padding: 0px;
 
         }
 
