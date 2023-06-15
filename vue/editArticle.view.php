@@ -141,7 +141,6 @@
     
 </style>
 
-
 <body>
 <body>
     <?php require_once('../vue/header.php'); ?>
@@ -193,6 +192,7 @@
 
                     <select id="id_motif" class="form-select" aria-label="Default select example" name="id_motif" value="<?= htmlentities($valeurs['id_motif'] ?? '') ?>">
                         <option>select motif </option>
+
                         <?php
                         foreach ($columns as $column) {
                             echo $column;
@@ -284,10 +284,17 @@
                 }
             }
 
-    
+            // mettre le ancian motif au première place 
+            recupere_id_motif = document.getElementById('recupere_id_motif').value
+            lesOptions = document.getElementsByTagName('option')
+            for (let option of lesOptions) {
+                if (option.value == recupere_id_motif) {
+                    option.setAttribute('selected', 'selected')
+                    option.setAttribute('selected', 'selected')
+                }
+            }
         </script>
         
 </body>
-
 
 </html>
