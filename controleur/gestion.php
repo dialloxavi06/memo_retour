@@ -15,6 +15,9 @@ if (isset($_SESSION['login']) && $_SESSION['login']=="root" ) {
     $message_Statut = "";
     $message_Motif = "";
 
+    $message_Enseigne=false;
+    $message_Statut=false;
+    $message_Motif=false;
 
     $erreurs = [
         'id_ens' => "", 'nomEns' => "",
@@ -42,6 +45,7 @@ if (isset($_SESSION['login']) && $_SESSION['login']=="root" ) {
     if ($effacerEns) {
         if (is_numeric($id_ens)) {
             $lesEns = $enseigne->desactiverEnseigne($id_ens);
+            
             header("refresh:0;url=gestion.php");
         } else $erreurs["id_ens"] = "Il faut choisir une enseigne !";
     }
@@ -57,7 +61,7 @@ if ($ajouterEns) {
         $lesEns = $enseigne->existeByNom_ens($nomEns);
         $existeEnseigneNotActif = $enseigne->existeEnseigneNotActif($nomEns);
         $message_Enseigne=$nomEns." a été ajoutée avec succès";
-        
+       
 
 
         if (!$lesEns) {
@@ -70,7 +74,7 @@ if ($ajouterEns) {
             header("refresh:0;url=gestion.php");
         } else {
             $erreurs["nomEns"] = "Enseigne déjà existante !";
-            echo "<script>alert('" . $erreurs["nomEns"] . "');</script>";
+             echo "<script>alert('" . $erreurs["nomEns"] . "');</script>";
         }
     } else {
         if ($nomEns === "") {
@@ -81,6 +85,20 @@ if ($ajouterEns) {
             echo "<script>alert('" . $erreurs["nomEns"] . "');</script>";
         }
     }
+    $nbErreurs = 0;
+    foreach ($erreurs as $erreur) {
+        if ($erreur != "") $nbErreurs++;
+    }
+
+    // if ($nbErreurs == 0) {
+    //     $message_Enseigne=true;
+    //     $message_Statut=true;
+    //     $message_Motif=true;
+    //     header( "refresh:3;url=gestion.php" );
+       
+    
+    // }
+
 }
 
 // les option des status
@@ -102,6 +120,7 @@ if ($effacerStatut) {
         $lesStatut = $statut->desactiverStatut($id_statut);
         header("refresh:0;url=gestion.php");
     } else $erreurs["id_statut"] = "Il faut choisir une enseigne !";
+    echo "<script>alert('" . $erreurs["id_statut"] . "');</script>";
 }
 
 // ajouter un statut 
@@ -113,7 +132,7 @@ if ($ajouterStatut) {
     
         $lesStatut = $statut->existeByLabel($nomStatut);
         $existeLabelNotActif = $statut->existeLabelNotActif($nomStatut);
-        $message_Statut = "Ajout effectué avec succès";
+         $message_Statut = "Ajout effectué avec succès";
 
         if (!$lesStatut ) {
             $lesStatut = $statut->insert($nomStatut);
@@ -125,6 +144,7 @@ if ($ajouterStatut) {
             header("refresh:0;url=gestion.php");
         }else if ($lesStatut && !$existeLabelNotActif) $erreurs["nomStatut"] = " statut déjà existant ! ";
     } else $erreurs["nomStatut"] = "Il faut saisir un statut ! ";
+    echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
 }
 
 // les option des motif
@@ -146,6 +166,7 @@ if ($effacerMotif) {
         $lesMotifs = $motif->desactiverMotif($id_motif);
         header("refresh:0;url=gestion.php");
     } else $erreurs["id_motif"] = "Il faut choisir un motif !";
+    echo "<script>alert('" . $erreurs["id_motif"] . "');</script>";
 }
 
 //;ajouter un motif
@@ -170,6 +191,7 @@ if ($ajouterMotif) {
         }else if ($lesMotif && !$existeMotifNotActif) $erreurs["nomMotif"] = " Motif déjà existant ! ";
         
     } else $erreurs["nomMotif"] = "Il faut saisir le motif ! ";
+    echo "<script>alert('" . $erreurs["nomMotif"] . "');</script>";
 }
 
     

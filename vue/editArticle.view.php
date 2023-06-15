@@ -11,6 +11,12 @@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
+        background-image: url("../vue/style/back7.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;        
+    }
+    header{
+        padding-bottom: 30px;
     }
 
     * {
@@ -28,6 +34,7 @@
         margin-top: 6px;
         margin-bottom: 16px;
         resize: vertical;
+        
     }
 
     input[type=number],
@@ -58,10 +65,29 @@
 
     .container {
         border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        margin-top: 100px;
+        background-color: none;
+        padding: 10px;
+        margin-top: 80px;
+        margin-bottom: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex; /* Ajout */
+  justify-content: center; /* Ajout */
+  height: 100%;
+  
     }
+    .contenu{
+        height: 700px;
+        width: 900px;
+        margin-top: 90px;
+        margin-left: 30%;
+        padding: 10px;
+        
+        
+    }
+    
 
     a {
         color: #0d6efd;
@@ -77,12 +103,44 @@
     body {
         padding-top: 5% ;
     }
+    
+    h1 {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  margin: 80px;
+  font-size: 2em;
+}
 
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5em;
+  }
+}
 
-    h2 {
-        text-align: center;
-    }
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.2em;
+  }
+}
+.btn{
+    height: 50px;
+        background-color: rgba(25, 156, 255, 1);
+}
+.btn:hover {
+            height: 52px;
+        }
+        #valider{
+        background-image: linear-gradient(to right, rgba(187, 5, 150, 0.8), rgba(5, 101, 187, 0.8));
+        margin-left: 10%;
+        }
+        #annuler{
+        background-image: linear-gradient(to right, rgba(187, 5, 150, 0.8), rgba(5, 101, 187, 0.8));
+        margin-right: 10%;
+        }#lesbtn{
+        }
+    
 </style>
+
 
 <body>
 <body>
@@ -91,29 +149,31 @@
 
     <form method="GET" action="" name="add">
         <div>
-            <h2>
-                <spam>Ajoutez des articles au Retour : </spam>
-                <spam id="id_ret"><?php echo $id_retour; ?></spam>
-                <h2>
-            <h2>
-                <spam>Ajoutez des articles au Retour : </spam>
-                <spam id="id_ret"><?php echo $id_retour; ?></spam>
-                <h2>
+            
+                <!-- <h1><spam>Ajoutez des articles au Retour : </spam> -->
+                <?php
+    if ($op == "mA") {
+        echo '<h1><span style="color: white;">Modification des articles :</span></h1>';
+    } else {
+        echo '<h1><span style="color: white;">Ajout des articles :</span></h1>';
+    }
+?>
+
+                <spam id="id_ret"><?php echo $id_retour; ?></spam></h1>
+            
         </div>
         <div class="container">
             <form id="formulaire" class="row g-3" method="GET" action="" name="add">
                 <input type="hidden" name="id_article" value="<?= $valeurs['id_article'] ?? '' ?>">
-
-
-                <div class="col-md-6">
-                    <label for="inputNom" class="form-label">Article: </label>
+                    <div class="contenu">
+                    <div class="col-md-6">
+                    <label for="inputNom" class="form-label" style="color: white;">Article: </label>
                     <input type="text" name="nom_article" class="form-control" id="nom_article" value="<?= $valeurs['nom_article'] ?? '' ?>">
                     <span class="text-danger"><?= $erreurs['nom_article'] ?? '' ?></span>
                 </div>
 
                 <div class="col-md-6">
-                    <label for="inputQuantite" class="form-label">Quantité</label>
-                    <input type="number" name="quantite" class="form-control" id="inputQuantite" placeholder="1" min="1" value="<?= htmlentities($valeurs['quantite'] ?? '') ?>">
+                    <label for="inputQuantite" class="form-label" style="color: white;">Quantité</label>
                     <input type="number" name="quantite" class="form-control" id="inputQuantite" placeholder="1" min="1" value="<?= htmlentities($valeurs['quantite'] ?? '') ?>">
                     <div id="erreur-quantite" class="text-danger"></div>
                     <span class="erreur"><?= $erreurs['quantite'] ?? '' ?></span>
@@ -122,21 +182,17 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="inputMontant" class="form-label">Montant </label>
-                    <input type="number" required name="montant_piece" class="form-control" min="0.00" step="0.01" placeholder="0.00" id="inputMontant" value="<?= htmlentities($valeurs['montant_piece'] ?? '') ?>">
+                    <label for="inputMontant" class="form-label" style="color: white;">Montant </label>
                     <input type="number" required name="montant_piece" class="form-control" min="0.00" step="0.01" placeholder="0.00" id="inputMontant" value="<?= htmlentities($valeurs['montant_piece'] ?? '') ?>">
                     <div id="erreur-montant" class="text_danger"></div>
                     <span class="erreur"><?= $erreurs['montant_piece'] ?? '' ?></span>
                 </div>
 
                 <div class="col-md-6">
-                    <label for="inputMontant" class="form-label" >Selectionnez un motif </label>
+                    <label for="inputMontant" class="form-label" style="color: white;">Selectionnez un motif </label>
 
                     <select id="id_motif" class="form-select" aria-label="Default select example" name="id_motif" value="<?= htmlentities($valeurs['id_motif'] ?? '') ?>">
                         <option>select motif </option>
-                    <select id="id_motif" class="form-select" aria-label="Default select example" name="id_motif" value="<?= htmlentities($valeurs['id_motif'] ?? '') ?>">
-                        <option>select motif </option>
-
                         <?php
                         foreach ($columns as $column) {
                             echo $column;
@@ -151,18 +207,21 @@
                 </div>
                 <section>
                     <label>&nbsp;</label>
-                    <div>
-                        <input type="submit" id="valider" name="valider" value="valider" />
+                    <div id="lesbtn">
+                        <input type="submit" id="valider" name="valider" value="valider" class="btn " />
                         <a href="../controleur/retour.php">
 
                             &emsp;
-                            <input type="submit" onclick="window.location.href='../controleur/retour.php'" id="annuler" name="annuler" value="Annuler" />
+                        <input type="submit" onclick="window.location.href='../controleur/retour.php'" id="annuler" name="annuler" value="Annuler" class="btn " />
                             <!-- recupere le id_motif -->
                             <input   type="hidden" id="recupere_id_motif" value="<?= htmlentities($valeurs['id_motif'] ?? '') ?>" />
                             <!-- recupere le id_motif -->
                             <input   type="hidden" id="recupere_id_motif" value="<?= htmlentities($valeurs['id_motif'] ?? '') ?>" />
                     </div>
-                </section>
+                </section> 
+                    </div>
+
+                
             </form>
         </div>
         <script>
@@ -225,16 +284,10 @@
                 }
             }
 
-            // mettre le ancian motif au première place 
-            recupere_id_motif = document.getElementById('recupere_id_motif').value
-            lesOptions = document.getElementsByTagName('option')
-            for (let option of lesOptions) {
-                if (option.value == recupere_id_motif) {
-                    option.setAttribute('selected', 'selected')
-                    option.setAttribute('selected', 'selected')
-                }
-            }
+    
         </script>
+        
 </body>
+
 
 </html>

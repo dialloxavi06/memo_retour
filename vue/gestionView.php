@@ -1,38 +1,37 @@
-
-
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
 
 
 
-    <section class="container my-10" style="margin-bottom: 50px;">
+<section class="container my-10" style="margin-bottom: 50px;">
     <?php require_once('../vue/header.php'); ?>
-    </section>
+</section>
+
 <body>
     <?php $message_Enseigne ?>
     <form method="GET" action="../controleur/gestion.php" name="add">
-
+ 
+    
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
                 <div class="row justify-content-center ">
                     <div class="col">
-                        
+
                         <div class="card shadow-sm">
-                            
-                            <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail"  preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                            <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
                                 <rect width="100%" height="100%" fill="#55595c" />
                                 <image href="../vue/style/enseigne.png" alt="Placeholder Image" style="width: 420px; height: 420px; background-size: contain;  " />
                             </svg>
 
                             <div class="card-body">
-                                <select   class="form-select" aria-label="Default select example" name="select_id_ens" id="select_id_ens">
+                                <select class="form-select" aria-label="Default select example" name="select_id_ens" id="select_id_ens">
                                     <option selected>Selectionnez l'enseigne</option>
                                     <?php
                                     foreach ($lignes as $ligne) {
@@ -42,7 +41,6 @@
                                 </select>
                                 <label>&nbsp;</label>
                                 <span class="erreur"><?= $erreurs['id_ens'] ?? '' ?></span>
-                                <div><?php echo $message_Enseigne; ?></div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
                                         <button type="submit" id="effacerEns" name="effacerEns" value="Supprimer" class="btn btn-sm btn-outline-secondary" style>Supprimer</button>
@@ -51,10 +49,12 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutEnseigne" aria-pressed="true">Ajouter</a>
+                        <a href="#" class="btn ajout btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutEnseigne" aria-pressed="true">Ajouter une enseigne</a>
+ 
                     </div>
+                    
                     <div class="col">
-                    <?php $message_Statut ?>
+                        <?php $message_Statut ?>
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
@@ -72,7 +72,6 @@
                                 </select>
                                 <label>&nbsp;</label>
                                 <span class="erreur"><?= $erreurs['id_statut'] ?? '' ?></span>
-                                <div><?php echo $message_Statut; ?></div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
                                         <button type="submit" id="effacerStatut" name="effacerStatut" value="Supprimer" class="btn btn-sm btn-outline-secondary">Supprimer</button>
@@ -80,12 +79,12 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutStatut" aria-pressed="true">Ajouter</a>
+                        <a href="#" class="btn ajout btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutStatut" aria-pressed="true">Ajouter un statut</a>
                     </div>
 
                     <div class="col">
-                    <?php $message_M ?>
-                        
+                        <?php $message_M ?>
+
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
@@ -103,7 +102,6 @@
                                 </select>
                                 <span class="erreur"><?= $erreurs['id_motif'] ?? '' ?></span>
                                 <label>&nbsp;</label>
-                                <div><?php echo $message_Motif; ?></div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
                                         <button type="submit" id="effacerMotif" name="effacerMotif" value="Supprimer" class="btn btn-sm btn-outline-secondary">Supprimer</button>
@@ -111,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutMotif" aria-pressed="true">Ajouter</a>
+                        <a href="#" class="btn ajout btn-primary btn-lg active select-style" role="button" data-toggle="modal" data-target="#modalAjoutMotif" aria-pressed="true">Ajouter un motif</a>
                     </div>
 
 
@@ -260,12 +258,10 @@
         dselect(select_id_motif, {
             search: true
         });
-
-     
     </script>
 </body>
 <footer>
-<?php require_once("../vue/footer.php") ?>
+    <?php require_once("../vue/footer.php") ?>
 </footer>
 <style>
     body::after {
@@ -283,24 +279,34 @@
         /* Appliquer un flou de 5 pixels uniquement Ã  l'image de fond */
         padding: 0px;
 
-        }
+    }
 
-        header {
-            margin-bottom: 80px;
-        } 
+    header {
+        margin-bottom: 80px;
+    }
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            padding: 10px;
-            margin: 0;
-            text-align: center;
-        }
-        .select-style {
-    width: 100%;
-    margin-top: 10px;
-}
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin: 0;
+        text-align: center;
+    }
 
-    </style>
+    .select-style {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .ajout{
+        
+        height: 50px;
+        background-color: rgba(25, 156, 255, 1);
+    }
+    .ajout:hover {
+            height: 52px;
+            background-image: linear-gradient(to right, rgba(187, 5, 150, 0.8), rgba(5, 101, 187, 0.8));
+    }
+
+</style>
