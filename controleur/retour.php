@@ -105,7 +105,6 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
                 . '" ><img src="../vue/style/suppression.png"></a></td>';
 
             $lesRows[] = "<tr id='table_article'>$ch</tr >";
-            $lesRows[] = "<tr id='table_article'>$ch</tr >";
 
 
             $lignes    = [];
