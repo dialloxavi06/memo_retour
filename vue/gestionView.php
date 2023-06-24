@@ -1,19 +1,9 @@
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-
-
-
-
 <section class="container my-10" style="margin-bottom: 50px;">
     <?php require_once('../vue/header.php'); ?>
 </section>
 
 <body>
-    <?php $message_Enseigne ?>
+    
     <form method="GET" action="../controleur/gestion.php" name="add">
  
     
@@ -41,6 +31,7 @@
                                 </select>
                                 <label>&nbsp;</label>
                                 <span class="erreur"><?= $erreurs['id_ens'] ?? '' ?></span>
+                                
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
                                         <button type="submit" id="effacerEns" name="effacerEns" value="Supprimer" class="btn btn-sm btn-outline-secondary" style>Supprimer</button>
@@ -54,7 +45,6 @@
                     </div>
                     
                     <div class="col">
-                        <?php $message_Statut ?>
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
@@ -72,6 +62,7 @@
                                 </select>
                                 <label>&nbsp;</label>
                                 <span class="erreur"><?= $erreurs['id_statut'] ?? '' ?></span>
+                                
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
                                         <button type="submit" id="effacerStatut" name="effacerStatut" value="Supprimer" class="btn btn-sm btn-outline-secondary">Supprimer</button>
@@ -83,8 +74,7 @@
                     </div>
 
                     <div class="col">
-                        <?php $message_M ?>
-
+                    
                         <div class="card shadow-sm">
                             <svg class="bd-placeholder-img card-img-top" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
                                 <title>Placeholder</title>
@@ -101,6 +91,7 @@
                                     ?>
                                 </select>
                                 <span class="erreur"><?= $erreurs['id_motif'] ?? '' ?></span>
+                                
                                 <label>&nbsp;</label>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group ms-auto mb-2">
@@ -219,9 +210,6 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -259,10 +247,11 @@
             search: true
         });
     </script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
-<footer>
-    <?php require_once("../vue/footer.php") ?>
-</footer>
 <style>
     body::after {
         content: "";
@@ -275,8 +264,6 @@
         background-image: url("../vue/style/back7.jpg");
         background-size: cover;
         background-repeat: no-repeat;
-        filter: blur(5px);
-        /* Appliquer un flou de 5 pixels uniquement Ã  l'image de fond */
         padding: 0px;
 
     }
@@ -307,6 +294,53 @@
     .ajout:hover {
             height: 52px;
             background-image: linear-gradient(to right, rgba(187, 5, 150, 0.8), rgba(5, 101, 187, 0.8));
+    } html {
+    overflow: scroll;
+    overflow-x: hidden;
+    }
+    ::-webkit-scrollbar {
+    width: 0px; 
+    }
+    
+
+    body::after {
+        content: "";
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url("../vue/style/back7.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: -10px;
+        margin-right: 30px;
+        /* Appliquer un flou de 5 pixels uniquement Ã  l'image de fond */
+
     }
 
+    header {
+        margin-bottom: 80px;
+    }
+
+     footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin-left: -10px;
+        text-align: center;
+    } 
+
+    .select-style {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .H-parametre{
+        color: orange;
+    }
+    .erreur{
+        color: red;
+    }
 </style>
+

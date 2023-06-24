@@ -75,12 +75,13 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
     if ($lesArticles != []) {
         $lesRows[] = "
 				<tr class='article'>
-				<th colspan='1'>Numéro</th>
-				<th colspan='2'>Article </th>
+				<th colspan='1'>Article </th>
+				<th colspan='2'>Numéro</th>
 				<th colspan='2'> Montant</th>
 				<th colspan='2'>Quantité</th>
 				<th colspan='3'>Motif</th>
                 ";
+
     } else $lesRows[] = "<tr class='article'><th style='text-align: center;' colspan='10'>il n y a pas des articles !</th>";
                 
                 
@@ -105,6 +106,7 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
                 . '" ><img src="../vue/style/suppression.png"></a></td>';
 
             $lesRows[] = "<tr id='table_article'>$ch</tr >";
+           
 
 
             $lignes    = [];
@@ -121,7 +123,7 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
         $ch .= '<td>' . $unRetour['date_achat'] . '</td>';
         $ch .= '<td>' . $unRetour['date_envoi'] . '</td>';
         $ch .= '<td>' . $unRetour['date_remboursement'] . '</td>';
-        $ch .= '<td>' . $unRetour['label'] . '</td>';
+        $ch .= '<td >' . $unRetour['label'] . '</td>';
         $ch .= '<td>' . $unRetour['nom'] . '</td>';
         $ch .= '<td>' . $unRetour['prenom'] . '</td>';
         $ch .= '<td>' . $montantRetour . " €" . '</td>';
@@ -130,16 +132,15 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
             .  urlencode($unRetour['id_retour'])
             . '"><img    src="../vue/style/détail.png" style="max-width: 30px; height: 30px;"></a></td>';
 
+
         $ch .= '<td><a onclick="javascript:return confirm(\'Etes-vous sûr de vouloir supprimer ? \') " id="supp" href="../controleur/retour.php?op=s&id='
             . urlencode($unRetour['id_retour'])
             . '" ><img src="../vue/style/suppression.png"></a></td>';
 
 
-
-
-        $ch .= '<td><img src="../vue/style/actualiser.png " style="max-width: 50px; height: 50px; background: none; border: none;" type="button" onclick="getIdRetour(this.value)" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"
-	    " value=' . urlencode($unRetour['id_retour']) . '></td>';
-
+            $ch .= '<td class="actualiser"><input type="button" class="chiffre" onclick="getIdRetour(this.value)" class="btn" data-toggle="modal" data-target="#exampleModalCenter"
+            " value=' . urlencode($unRetour['id_retour']) . '></input></td>';
+    
 
         $lignes[] = "<tr>$ch</tr>";
 
@@ -179,6 +180,7 @@ if ((time() - $_SESSION['last_login']) > 2000 && $_SESSION['login'] != "root") {
 
         if ($date_remboursement) {
             $retour->udateDateRemboursement($id_retour_modif_statut, $date_remboursement);
+            
         }
         header("refresh:0;url=retour.php");
     }

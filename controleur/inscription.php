@@ -79,15 +79,14 @@ if ($valider) {
 
     if ($mdp != null    && strlen(trim($_POST['mdp']))>= 6) {
         if (!password_verify($mdpRep, $mdp)) {
-            $erreurs['mdpR'] = 'Les mots de passe
-             ne dont pas identiques';
+            $erreurs['mdpR'] = 'les mots de pass ne dont pas identiques';
         } else  $valeurs['mdp'] = $mdp;
-    } else $erreurs['mdp'] = 'Il faut entrer un mdp correct';
+    } else $erreurs['mdp'] = 'il faut entrer un mots de pass correct';
 
 
     if ($naissance != null) {
         $valeurs['naissance'] = $naissance;
-    } else $erreurs['naissance'] = 'Il faut entrer la date de naissance';
+    } else $erreurs['naissance'] = 'il faut entrer la date de naissance';
 
 
     $nbErreurs = 0;
@@ -105,7 +104,7 @@ if ($valider) {
         $client->setMdp($mdp);
         $client->setNaissance($naissance);
         $clientDAO->insert($client);
-        header( "refresh:3;url=login.php" );
+        header( "refresh:2;url=login.php" );
         $messageInscription=true;
     
     }

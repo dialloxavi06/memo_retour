@@ -15,9 +15,7 @@ if (isset($_SESSION['login']) && $_SESSION['login']=="root" ) {
     $message_Statut = "";
     $message_Motif = "";
 
-    $message_Enseigne=false;
-    $message_Statut=false;
-    $message_Motif=false;
+  
 
     $erreurs = [
         'id_ens' => "", 'nomEns' => "",
@@ -51,7 +49,7 @@ if (isset($_SESSION['login']) && $_SESSION['login']=="root" ) {
     }
 
     // ajouter une enseigne 
-$nomEns = isset($_GET['nomEns']) ? ucfirst(strip_tags(trim($_GET['nomEns']))) : null;
+$nomEns = isset($_GET['nomEns']) ? strip_tags(trim($_GET['nomEns'])) : null;
 $ajouterEns = isset($_GET['ajouterEns']) ? $_GET['ajouterEns'] : null;
 
 
@@ -120,11 +118,10 @@ if ($effacerStatut) {
         $lesStatut = $statut->desactiverStatut($id_statut);
         header("refresh:0;url=gestion.php");
     } else $erreurs["id_statut"] = "Il faut choisir une enseigne !";
-    echo "<script>alert('" . $erreurs["id_statut"] . "');</script>";
 }
 
 // ajouter un statut 
-$nomStatut = isset($_GET['nomStatut']) ? ucfirst(strip_tags(trim($_GET['nomStatut']))) : null;
+$nomStatut = isset($_GET['nomStatut']) ? strip_tags(trim($_GET['nomStatut'])) : null;
 $ajouterStatut = isset($_GET['ajouterStatut']) ? $_GET['ajouterStatut'] : null;
 
 if ($ajouterStatut) {
@@ -139,13 +136,24 @@ if ($ajouterStatut) {
             header("refresh:1;url=gestion.php");
         }
         
-        if ($existeLabelNotActif){
+        elseif ($existeLabelNotActif){
             $lesStatut = $statut->activerStatut($nomStatut);
             header("refresh:0;url=gestion.php");
-        }else if ($lesStatut && !$existeLabelNotActif) $erreurs["nomStatut"] = " statut déjà existant ! ";
-    } else $erreurs["nomStatut"] = "Il faut saisir un statut ! ";
-    echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
+        }else{
+            $erreurs["nomStatut"] = " Statut déjà existant ! ";
+            echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
+    } }else{
+        if ($nomStatut === "") {
+            $erreurs["nomStatut"] = "Il faut saisir un statut !";
+            echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
+        } else {
+            $erreurs["nomStatut"] = "Il faut choisir un statut !";
+            echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
+        }
+    }
 }
+
+
 
 // les option des motif
 $motif = new MotifDAO();
@@ -166,11 +174,10 @@ if ($effacerMotif) {
         $lesMotifs = $motif->desactiverMotif($id_motif);
         header("refresh:0;url=gestion.php");
     } else $erreurs["id_motif"] = "Il faut choisir un motif !";
-    echo "<script>alert('" . $erreurs["id_motif"] . "');</script>";
 }
 
 //;ajouter un motif
-$nomMotif = isset($_GET['nomMotif']) ? ucfirst(strip_tags(trim($_GET['nomMotif']))) : null;
+$nomMotif = isset($_GET['nomMotif']) ? strip_tags(trim($_GET['nomMotif'])) : null;
 $ajouterMotif = isset($_GET['ajouterMotif']) ? $_GET['ajouterMotif'] : null;
 
 if ($ajouterMotif) {
@@ -184,22 +191,26 @@ if ($ajouterMotif) {
             $lesMotif = $motif->insert($nomMotif);
             header("refresh:1;url=gestion.php");
 
-        }if ($existeMotifNotActif){
+        }elseif ($existeMotifNotActif){
             $lesMotif = $motif->activerMotif($nomMotif);
             header("refresh:0;url=gestion.php");
         
-        }else if ($lesMotif && !$existeMotifNotActif) $erreurs["nomMotif"] = " Motif déjà existant ! ";
+        }else{
+            $erreurs["nomMotif"] = " Motif déjà existant ! ";
+            echo "<script>alert('" . $erreurs["nomMotif"] . "');</script>";
         
-    } else $erreurs["nomMotif"] = "Il faut saisir le motif ! ";
+    } }else {
+        if ($nomMotif === "") {
+        $erreurs["nomMotif"] = "Il faut saisir le motif ! ";
     echo "<script>alert('" . $erreurs["nomMotif"] . "');</script>";
-}
+}else{
+    $erreurs["nomStatut"] = "Il faut choisir un statut !";
+            echo "<script>alert('" . $erreurs["nomStatut"] . "');</script>";
+        }
+}}
+
 
     
-    
-
-
-   
-
     require_once('../vue/gestionView.php');
 } else {
     echo "<h2 style=' text-align: center;'>Désolé, il y a une erreur : vous ne pouvez pas accéder à cette page.</h2>";
